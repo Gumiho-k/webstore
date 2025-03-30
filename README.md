@@ -1,44 +1,44 @@
-# 這是一個使用 Flask 建立的網路商店展示網站。
+# This is an online store showcase website built using Flask.
 
-## 功能
-- 產品展示
-- 產品分類
-- 搜索功能（帶有動態搜索建議）
-- 響應式設計
+## Function
+- Products
+- Product Categories
+- Reference function (with dynamic search suggestions)
+- Responsive design
 
-## 安裝說明
-1. 克隆倉庫
+## Installation Instructions
+1. Clone the repository
 \`\`\`bash
 git clone https://github.com/Gumiho-k/webstore.git
 \`\`\`
 
-2. 建立虛擬環境
+2. Create a virtual environment 
 \`\`\`bash
 python -m venv venv
 \`\`\`
 
-3. 啟動虛擬環境
+3. Start the virtual environment
 - Windows: \`venv\Scripts\activate\`
 - Unix/MacOS: \`source venv/bin/activate\`
 
-4. 安裝依賴
+4. Install requirements
 \`\`\`bash
 pip install -r requirements.txt
 \`\`\`
 
-5. 運行應用
+5. Run the application
 \`\`\`bash
 python app.py
 \`\`\`
 
-## 技術棧
+## Technology Stack
 - Python 3.12.6
 - Flask
 - HTML/CSS
 - JavaScript
 
-## 功能特點
-- 動態搜索建議
-- 響應式設計
-- 產品分類瀏覽
-- 簡潔的使用者界面" > README.md
+## Features
+- Dynamic search suggestions
+- Responsive design
+- Browse by product category
+- Simple user interface">README.md
