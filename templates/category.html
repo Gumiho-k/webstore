@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}{{ category }} - 我的網路商店{% endblock %}
+
+{% block content %}
+<div class="category-header">
+    <h1>{{ category }}</h1>
+</div>
+
+<section class="products">
+    <div class="product-grid">
+        {% for product in products %}
+        <div class="product-card">
+            <img src="{{ url_for('static', filename='images/' + product.image) }}" alt="{{ product.name }}">
+            <h3>{{ product.name }}</h3>
+            <p>{{ product.description }}</p>
+            <p class="price">NT$ {{ product.price }}</p>
+            <a href="{{ url_for('product', product_id=product.id) }}" class="btn">查看詳情</a>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

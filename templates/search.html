@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}搜尋結果 - 我的網路商店{% endblock %}
+
+{% block content %}
+<div class="search-results">
+    <h1>搜尋結果: "{{ query }}"</h1>
+    {% if products %}
+    <p>找到 {{ products|length }} 個結果</p>
+    <div class="product-grid">
+        {% for product in products %}
+        <div class="product-card">
+            <img src="{{ url_for('static', filename='images/' + product.image) }}" alt="{{ product.name }}">
+            <h3>{{ product.name }}</h3>
+            <p>{{ product.description }}</p>
+            <p class="price">NT$ {{ product.price }}</p>
+            <a href="{{ url_for('product', product_id=product.id) }}" class="btn">查看詳情</a>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="no-results">沒有找到相關商品</p>
+    {% endif %}
+</div>
+{% endblock %}

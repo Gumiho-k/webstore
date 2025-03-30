@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}{{ product.name }} - 我的網路商店{% endblock %}
+
+{% block content %}
+<div class="product-detail">
+    {% if product %}
+    <div class="product-image">
+        <img src="{{ url_for('static', filename='images/' + product.image) }}" alt="{{ product.name }}">
+    </div>
+    <div class="product-info">
+        <h1>{{ product.name }}</h1>
+        <p class="price">NT$ {{ product.price }}</p>
+        <div class="description">
+            <h2>商品描述</h2>
+            <p>{{ product.description }}</p>
+        </div>
+        <div class="specifications">
+            <h2>商品規格</h2>
+            <ul>
+                {% for spec in product.specifications %}
+                <li>{{ spec }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% else %}
+    <p>找不到該商品</p>
+    {% endif %}
+</div>
+{% endblock %}
