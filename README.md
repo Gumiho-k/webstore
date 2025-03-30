@@ -1,4 +1,4 @@
-# This is an online store showcase website built using Flask.
+# This is an online store showcase website built with Flask.
 
 ## Function
 - Products
