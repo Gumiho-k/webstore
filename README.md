@@ -1,3 +1,5 @@
+Hey everyone, I'm new to coding and I want to try to build a website. Any suggestions would be helpful~
+
 # This is an online store showcase website built with Flask.
 
 ## Function
