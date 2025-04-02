@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                     <img src="/static/images/${product.image}" alt="${product.name}">
                                     <div>
                                         <h4>${product.name}</h4>
-                                        <p>NT$ ${product.price}</p>
+                                        <p>MOP ${product.price}</p>
                                     </div>
                                 `;
                                 div.addEventListener('click', () => {
@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function() {
     searchForm.addEventListener('click', function(e) {
         e.stopPropagation();
     });
-    
+
     // 按下 Enter 鍵時提交搜索
     searchInput.addEventListener('keypress', function(e) {
         if (e.key === 'Enter' && this.value.trim()) {

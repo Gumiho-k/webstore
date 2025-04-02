@@ -10,14 +10,13 @@
     <header>
         <nav>
             <div class="logo">
-                <a href="/">我的商店</a>
+                <a href="/">形造室</a>
             </div>
             <ul class="nav-links">
                 <li><a href="/">首頁</a></li>
-                <li><a href="{{ url_for('category', category='分類一') }}">分類一</a></li>
-                <li><a href="{{ url_for('category', category='分類二') }}">分類二</a></li>
-                <li><a href="/#about">關於我們</a></li>
-                <li><a href="/#contact">聯絡我們</a></li>
+                <li><a href="{{ url_for('category', category='已有商品') }}">已有商品</a></li>
+                <li><a href="{{ url_for('category', category='客製化設計') }}">客製化設計</a></li>
+                <li><a href="{{ url_for('contact') }}">聯絡我們</a></li>
                 <li class="search-container">
                     <form action="{{ url_for('search') }}" method="get" id="search-form" class="search-form-hidden">
                         <input type="text" 
@@ -38,9 +37,67 @@
         {% block content %}{% endblock %}
     </main>
 
-    <footer>
-        <p>&copy; 2024 我的網路商店. 版權所有.</p>
-    </footer>
+
     <script src="{{ url_for('static', filename='js/search.js') }}"></script>
+    {% block scripts %}{% endblock %}
+
+    
+
+
+
+
+<footer class="site-footer">
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>關於我們</h3>
+            <p>專業的3D列印客製化服務，為您打造獨一無二的作品。</p>
+        </div>
+        
+        <div class="footer-section">
+            <h3>快速連結</h3>
+            <ul>
+                <li><a href="{{ url_for('home') }}">首頁</a></li>
+                {% for category in categories %}
+                <li><a href="{{ url_for('category', category=category) }}">{{ category }}</a></li>
+                {% endfor %}
+                <li><a href="{{ url_for('contact') }}">聯絡我們</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-section">
+            <h3>聯絡資訊</h3>
+            <ul>
+                <li><i class="fas fa-envelope"></i> service@gmail.com</li>
+                <li><i class="fas fa-phone"></i> (+863) 6323-3049</li>
+                <li><i class="fas fa-map-marker-alt"></i> 澳門高士德</li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>關注我們</h3>
+            <div class="social-links">
+                <a href="https://www.facebook.com/您的專頁" target="_blank" class="social-link">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://www.instagram.com/shape.by.u/" target="_blank" class="social-link">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://twitter.com/您的帳號" target="_blank" class="social-link">
+                    <i class="fab fa-twitter"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer-bottom">
+        <p>&copy; 2025 3D列印客製化商品形造室. 版權所有.</p>
+    </div>
+</footer>
+
+<!-- 添加 Font Awesome 圖標 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<script src="{{ url_for('static', filename='js/imageZoom.js') }}"></script>
+<script src="{{ url_for('static', filename='js/backToTop.js') }}"></script>
 </body>
 </html>
+

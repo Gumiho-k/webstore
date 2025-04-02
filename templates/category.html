@@ -14,7 +14,7 @@
             <img src="{{ url_for('static', filename='images/' + product.image) }}" alt="{{ product.name }}">
             <h3>{{ product.name }}</h3>
             <p>{{ product.description }}</p>
-            <p class="price">NT$ {{ product.price }}</p>
+            <p class="price">MOP {{ product.price }}</p>
             <a href="{{ url_for('product', product_id=product.id) }}" class="btn">查看詳情</a>
         </div>
         {% endfor %}

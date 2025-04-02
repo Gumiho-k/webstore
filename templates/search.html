@@ -10,10 +10,10 @@
     <div class="product-grid">
         {% for product in products %}
         <div class="product-card">
-            <img src="{{ url_for('static', filename='images/' + product.image) }}" alt="{{ product.name }}">
+            <img src="{{ url_for('static', filename='images/' + product.image) }}" alt="{{ product.name }}" width="200"/ height="200" style="object-fit: contain; max-width: 100%; height: auto;">
             <h3>{{ product.name }}</h3>
             <p>{{ product.description }}</p>
-            <p class="price">NT$ {{ product.price }}</p>
+            <p class="price">MOP {{ product.price }}</p>
             <a href="{{ url_for('product', product_id=product.id) }}" class="btn">查看詳情</a>
         </div>
         {% endfor %}

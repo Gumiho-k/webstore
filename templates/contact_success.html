@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}訊息已送出 - 3D列印客製化商品{% endblock %}
+
+{% block content %}
+<div class="success-container">
+    <div class="success-message">
+        <i class="fas fa-check-circle"></i>
+        <h1>感謝您的訊息</h1>
+        <p>親愛的 {{ name }}，我們已收到您的訊息，將會盡快回覆您。</p>
+        <div class="success-actions">
+            <a href="{{ url_for('home') }}" class="btn">返回首頁</a>
+            <a href="{{ url_for('contact') }}" class="btn btn-outline">再次聯絡</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
