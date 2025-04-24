@@ -1,0 +1,190 @@
+{% extends "base.html" %}
+
+{% block title %}AI 模型生成器 - 形造室{% endblock %}
+
+{% block content %}
+<div class="ai-generator-container">
+    <div class="ai-generator-header">
+        <h1>AI 模型生成器</h1>
+        <p>上傳您的線稿，我們的 AI 將幫助您創建精美的 3D 模型</p>
+    </div>
+
+    <div class="ai-generator-steps">
+        <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+                <h3>上傳線稿</h3>
+                <p>上傳您的線稿素描或設計圖</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+                <h3>AI 處理</h3>
+                <p>我們的 AI 將清理、重繪並為您的線稿上色</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+                <h3>3D 模型生成</h3>
+                <p>AI 將生成您的 3D 模型</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+                <h3>預覽與訂購</h3>
+                <p>預覽您的 3D 模型並下訂單</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="upload-container">
+        <form id="upload-form" enctype="multipart/form-data">
+            <div class="upload-area" id="upload-area">
+                <img src="{{ url_for('static', filename='images/upload-icon.png') }}" alt="上傳" id="upload-icon">
+                <p>點擊或拖放您的線稿圖片</p>
+                <p class="file-info">支持 JPG, PNG, GIF 格式，最大 5MB</p>
+                <input type="file" id="sketch-upload" name="sketch" accept="image/*" hidden>
+            </div>
+            <button type="submit" class="submit-btn" id="upload-btn" disabled>開始生成</button>
+        </form>
+    </div>
+
+    <div class="process-container" style="display: none;">
+        <div class="process-steps">
+            <div class="process-step" id="step-1">
+                <div class="step-icon">
+                    <i class="fas fa-upload"></i>
+                </div>
+                <div class="step-label">上傳完成</div>
+                <div class="step-status">處理中...</div>
+            </div>
+            <div class="process-step" id="step-2">
+                <div class="step-icon">
+                    <i class="fas fa-paint-brush"></i>
+                </div>
+                <div class="step-label">AI 處理中</div>
+                <div class="step-status">等待中...</div>
+            </div>
+            <div class="process-step" id="step-3">
+                <div class="step-icon">
+                    <i class="fas fa-cube"></i>
+                </div>
+                <div class="step-label">3D 模型生成中</div>
+                <div class="step-status">等待中...</div>
+            </div>
+        </div>
+        
+        <div class="progress-container">
+            <div class="progress-bar" id="total-progress"></div>
+        </div>
+        
+        <p class="process-message" id="process-message">正在處理您的圖片，請稍候...</p>
+    </div>
+
+    <div class="result-container" style="display: none;">
+        <div class="result-grid">
+            <div class="result-item">
+                <h3>原始線稿</h3>
+                <div class="result-image-container">
+                    <img id="original-sketch" src="" alt="原始線稿">
+                </div>
+            </div>
+            <div class="result-item">
+                <h3>AI 處理後</h3>
+                <div class="result-image-container">
+                    <img id="processed-image" src="" alt="AI 處理後">
+                </div>
+            </div>
+            <div class="result-item result-item-full">
+                <h3>3D 模型預覽</h3>
+                <div class="model-preview-container">
+                    <div id="model-viewer"></div>
+                    <div class="model-controls">
+                        <button id="rotate-left"><i class="fas fa-undo"></i></button>
+                        <button id="rotate-right"><i class="fas fa-redo"></i></button>
+                        <button id="zoom-in"><i class="fas fa-search-plus"></i></button>
+                        <button id="zoom-out"><i class="fas fa-search-minus"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="order-section">
+            <h3>訂購您的 3D 模型</h3>
+            <form id="order-form">
+                <div class="form-group">
+                    <label for="model-size">尺寸</label>
+                    <select id="model-size" name="size">
+                        <option value="small">小 (10cm) - MOP 150</option>
+                        <option value="medium" selected>中 (15cm) - MOP 250</option>
+                        <option value="large">大 (20cm) - MOP 350</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="model-material">材質</label>
+                    <select id="model-material" name="material">
+                        <option value="pla">PLA 標準塑料 (多色可選)</option>
+                        <option value="abs">ABS 耐用塑料</option>
+                        <option value="resin">高精度樹脂</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="model-color">顏色</label>
+                    <div class="color-options">
+                        <div class="color-option">
+                            <input type="radio" id="color-white" name="color" value="white" checked>
+                            <label for="color-white" style="background-color: white;"></label>
+                        </div>
+                        <div class="color-option">
+                            <input type="radio" id="color-black" name="color" value="black">
+                            <label for="color-black" style="background-color: black;"></label>
+                        </div>
+                        <div class="color-option">
+                            <input type="radio" id="color-red" name="color" value="red">
+                            <label for="color-red" style="background-color: red;"></label>
+                        </div>
+                        <div class="color-option">
+                            <input type="radio" id="color-blue" name="color" value="blue">
+                            <label for="color-blue" style="background-color: blue;"></label>
+                        </div>
+                        <div class="color-option">
+                            <input type="radio" id="color-green" name="color" value="green">
+                            <label for="color-green" style="background-color: green;"></label>
+                        </div>
+                        <div class="color-option">
+                            <input type="radio" id="color-yellow" name="color" value="yellow">
+                            <label for="color-yellow" style="background-color: yellow;"></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="model-quantity">數量</label>
+                    <input type="number" id="model-quantity" name="quantity" min="1" value="1">
+                </div>
+                <div class="order-summary">
+                    <div class="summary-item">
+                        <span>單價:</span>
+                        <span id="unit-price">MOP 250</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>數量:</span>
+                        <span id="quantity-display">1</span>
+                    </div>
+                    <div class="summary-item total">
+                        <span>總計:</span>
+                        <span id="total-price">MOP 250</span>
+                    </div>
+                </div>
+                <button type="submit" class="submit-btn">加入購物車</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/ai_model_generator.js') }}"></script>
+{% endblock %}
